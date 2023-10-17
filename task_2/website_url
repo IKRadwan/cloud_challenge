@@ -1,1 +1,7 @@
+#static website hosted on a bucket in GCP
 https://storage.googleapis.com/dareit-cloud-challenge-first-bucket-ir/index.html
+
+#commands to create the bucket and copy index.html 
+gcloud storage buckets create gs://dareit-bucket-created-by-gcloudcommands --location=eu --no-public-access-prevention --uniform-bucket-level-access
+gcloud storage buckets add-iam-policy-binding gs://dareit-bucket-created-by-gcloudcommands --member=allUsers --role=roles/storage.objectViewer
+gcloud storage cp gs://dareit-cloud-challenge-first-bucket-ir/index.html gs://dareit-bucket-created-by-gcloudcommands
