@@ -140,3 +140,4 @@
 Copy the URL of the object (index.htm) from your bucket: 
 
 🔗(https://storage.googleapis.com/dareit-t6-bucket-ir/index.html)
+

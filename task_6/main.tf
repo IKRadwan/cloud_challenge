@@ -4,19 +4,28 @@ provider "google" {
   zone    = "us-central1-c"
 }
 
+resource "google_storage_bucket" "bucket_2_dareit_tf" {
+  name     = var.bucket_2
+  location = "US"
+  force_destroy = true
+
+  uniform_bucket_level_access = true
+
+  website {
+    main_page_suffix = "index.html"
+  }
+}
+
 resource "google_storage_bucket_iam_member" "member" {
-  bucket = "dareit-t6-bucket-ir"
+  provider = google
+  bucket = var.bucket_2
   role   = "roles/storage.objectViewer"
   member = "allUsers"
 }
 
-resource "google_storage_bucket" "bucket" {
-  name     = "dareit-t6-bucket-ir"
-  location = "US"
-}
 
-resource "google_compute_instance" "dareit-t6-vm-ir" {
-  name         = "vm-ir-tf"
+resource "google_compute_instance" "instance_2_dareit_tf" {
+  name         = var.instance_2
   machine_type = "n2-standard-2"
   zone         = "us-central1-a"
 
@@ -45,13 +54,13 @@ resource "google_compute_instance" "dareit-t6-vm-ir" {
   }
 }
   
-resource "google_sql_database" "database" {
-  name     = "dareit"
-  instance = google_sql_database_instance.instance.name
+resource "google_sql_database" "db_dareit_tf" {
+  name     = var.database_2
+  instance = google_sql_database_instance.db_instance_dareit_tf.name
 }
 
-resource "google_sql_database_instance" "instance" {
-  name             = "dareit-database-instance"
+resource "google_sql_database_instance" "db_instance_dareit_tf" {
+  name             = var.database_instance_2
   region           = "us-central1"
   database_version = "POSTGRES_15"
   settings {
@@ -62,8 +71,8 @@ resource "google_sql_database_instance" "instance" {
 }
 
 resource "google_sql_user" "users" {
-  name     = "dareit_user"
+  name     = var.database_user
 
-  instance = google_sql_database_instance.instance.name
-  password = "zwf124!"
+  instance = google_sql_database_instance.db_instance_dareit_tf.name
+  password = var.db_password
 }
