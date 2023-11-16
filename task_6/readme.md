@@ -141,3 +141,4 @@ Copy the URL of the object (index.htm) from your bucket:
 
 🔗(https://storage.googleapis.com/dareit-t6-bucket-ir/index.html)
 
+**Step 19** Modify the main.tf configuration file to work with variables defined in the [variables.tf file](https://github.com/IKRadwan/cloud_challenge/blob/main/task_6/variables.tf)
